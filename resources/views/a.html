@@ -1,0 +1,145 @@
+$ruangan::create([
+    'name'=>'kamar tidur',
+    'slug'=>'kamar-tidur'
+])
+
+$ruangan::create([
+    'name'=>'ruang keluarga',
+    'slug'=>'ruang-keluarga'
+])
+
+$ruangan::create([
+    'name'=>'dapur',
+    'slug'=>'dapur'
+])
+
+$jenis::create([
+    'name'=>'televisi',
+    'slug'=>'televisi'
+])
+
+$jenis::create([
+    'name'=>'panci',
+    'slug'=>'panci'
+])
+
+$jenis::create([
+    'name'=>'kasur',
+    'slug'=>'kasur'
+])
+
+$kategori::create([
+    'name'=>'elektronik',
+    'slug'=>'elektronik'
+])
+
+$kategori::create([
+    'name'=>'furniture',
+    'slug'=>'furniture'
+])
+
+$kategori::create([
+    'name'=>'alat masak',
+    'slug'=>'alat-masak'
+])
+
+$produk::create([
+    'nama_barang'=>'kasur soft premium',
+    'kategori_id'=>2,
+    'jenis_id'=>3,
+    'ruangan_id'=>2,
+    'slug'=>'kasur-soft-premium',
+    'harga_barang'=>'3000000',
+    'jumlah_barang'=>'9',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+$produk::create([
+    'nama_barang'=>'panci pubg',
+    'kategori_id'=>3,
+    'jenis_id'=>2,
+    'ruangan_id'=>2,
+    'slug'=>'panci-pubg',
+    'harga_barang'=>'200000',
+    'jumlah_barang'=>'6',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+$produk::create([
+    'nama_barang'=>'TV samsung 4K',
+    'kategori_id'=>1,
+    'jenis_id'=>1,
+    'ruangan_id'=>2,
+    'slug'=>'tv-samsung',
+    'harga_barang'=>'100000',
+    'jumlah_barang'=>'3',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+\\\\
+
+$produk::create([
+    'nama_barang'=>'kasur soft premium',
+    'kategori_id'=>1,
+    'slug'=>'kasur-soft-premium',
+    'harga_barang'=>'3000000',
+    'jumlah_barang'=>'9',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+$produk::create([
+    'nama_barang'=>'panci pubg',
+    'kategori_id'=>3,
+    'slug'=>'panci-pubg',
+    'harga_barang'=>'200000',
+    'jumlah_barang'=>'6',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+$produk::create([
+    'nama_barang'=>'TV samsung 4K',
+    'kategori_id'=>1,
+    'slug'=>'tv-samsung',
+    'harga_barang'=>'100000',
+    'jumlah_barang'=>'3',
+    'deskripsi_barang'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quidem voluptatibus optio fugiat est quaerat magnam quasi id dolorem molestiae!'
+])
+
+Schema::create('produks', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('kategori_id');
+    $table->string('nama_barang');
+    $table->string('slug')->unique();
+    $table->double('harga_barang');
+    $table->integer('jumlah_barang');
+    $table->text('deskripsi_barang');
+    $table->timestamp('tanggal_masuk_barang')->nullable();
+    $table->timestamps();
+});
+
+use HasFactory;
+    protected $guarded=['tanggal_masuk_barang'];
+    protected $fillable=['nama_barang','kategori_id','slug','harga_barang','jumlah_barang','deskripsi_barang'];
+    public function kategori(){
+        return $this->belongsTo(Kategori::class);
+    }
+
+tabel
+Schema::create('kategoris', function (Blueprint $table) {
+    $table->id();
+    $table->string('name')->unique();
+    $table->string('slug')->unique();
+    $table->timestamps();
+});
+
+model
+use HasFactory;
+    protected $guarded = ['id'];
+    protected $fillable=['name','slug'];
+    public function kategoris(){
+        return $this->hasMany(Produk::class);
+    }
+
+
+
+
